@@ -1,0 +1,28 @@
+
+name: CI
+
+on:
+  push:
+    branches: [ "" ]
+  pull_request:
+    branches: [ "" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v3.4.0
+        with:
+          java-version: 11
+          distribution: "corretto"
+          cache: "gradle"
+      
+
+      - name: Build Vue.js
+        run: |
+          cd vuejs
+          ./gradlew build
